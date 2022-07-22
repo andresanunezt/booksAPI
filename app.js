@@ -4,15 +4,17 @@ const app = express();
 const db = mongoose.connect("mongodb://localhost/rest_api_practice");
 const port = process.env.PORT || 3000;
 const Book = require("./models/bookModel.js");
+const User = require("./models/userModel.js");
 const bodyParser = require("body-parser");
 
-const bookRouter = require('./routes/bookRouter')(Book);
+const bookRouter = require("./routes/bookRouter")(Book);
+const userRouter = require("./routes/userRouter")(User);
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-
 app.use("/api", bookRouter);
+app.use("/api", userRouter);
 
 app.get("/", (req, res) => {
   res.send("Welcome to my API LOL");
