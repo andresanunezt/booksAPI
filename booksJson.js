@@ -1,19 +1,19 @@
 db.books.insert([
   {
     title: "100 Años de Soledad",
-    authoer: "Gabriel Garcia Maquez",
+    author: "Gabriel Garcia Maquez",
     genre: "Novel",
     read: false,
   },
   {
     title: "Candide",
-    authoer: "Voltaire",
+    author: "Voltaire",
     genre: "Satire",
     read: false,
   },
   {
     title: "Women",
-    authoer: "Bukowski",
+    author: "Bukowski",
     genre: "Prose",
     read: false,
   }
