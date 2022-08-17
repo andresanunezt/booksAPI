@@ -1,3 +1,5 @@
+db.books.deleteMany({});
+
 db.books.insert([
   {
     title: "100 Años de Soledad",

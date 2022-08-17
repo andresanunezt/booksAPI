@@ -7,6 +7,29 @@ function routes(User) {
 
   saltRounds = 10;
 
+  // configure basicAuth
+app.use(basicAuth({
+  authorizer : dbAuthorizer,
+  authorizeAsync : true,
+  unauthorizedResponse : () => "You do not have access to this content"
+}));
+
+// compare username and password with db content
+// return boolean indicating password match
+async function dbAuthorizer(username, password, callback) {
+  try{
+    // get matching user from db
+    const user = await User.findOne({where: {name: username}})
+    // if username is valid compare passwords
+    let isValid = ( user != null ) ? await bcrypt.compare(password, user.password) : false;
+    callback(null, isValid)
+  }catch(err){
+    //if authorizer fails, show error
+    console.log("Error: ", err)
+    callback(null, false)
+  }
+}
+
   userRouter
     .route("/users")
     .post((req, res) => {
