@@ -1,6 +1,7 @@
 const express = require("express");
 
 bcrypt = require("bcrypt");
+const basicAuth = require('express-basic-auth');
 
 function routes(User) {
   const userRouter = express.Router();
@@ -8,7 +9,7 @@ function routes(User) {
   saltRounds = 10;
 
   // configure basicAuth
-app.use(basicAuth({
+userRouter.use(basicAuth({
   authorizer : dbAuthorizer,
   authorizeAsync : true,
   unauthorizedResponse : () => "You do not have access to this content"
