@@ -7,14 +7,18 @@ const Book = require("./models/bookModel.js");
 const User = require("./models/userModel.js");
 const bodyParser = require("body-parser");
 
-const bookRouter = require("./routes/bookRouter")(Book);
+// const bookRouter = require("./routes/bookRouter")(Book);
 const userRouter = require("./routes/userRouter")(User);
+const signupRouter = require('./routes/signupRouter')(User);
+const loginRouter = require("./routes/loginRouter")(User,Book);
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-app.use("/api", bookRouter);
+// app.use("/api", bookRouter);
 app.use("/api", userRouter);
+app.use('/api', signupRouter);
+app.use("/api", loginRouter);
 
 app.get("/", (req, res) => {
   res.send("Welcome to my API LOL");
